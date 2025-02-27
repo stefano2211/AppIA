@@ -37,14 +37,22 @@ def register(username: str, email: str, password: str):
 
 # Función para manejar el logout
 def logout():
+    """
+    Limpia el estado de la sesión al hacer logout.
+    """
     # Limpiar el estado de la sesión
     st.session_state.token = None
     st.session_state.username = None
     st.session_state.chat_history = []
     st.session_state.uploaded_pdfs = []
     st.session_state.current_chat_id = None
+
+    # Limpiar la memoria de la conversación (si está en uso)
+    if "conversation_memory" in st.session_state:
+        st.session_state.conversation_memory.clear()
+
     st.success("Sesión cerrada correctamente.")
-    st.rerun()
+    st.rerun()  # Recargar la aplicación para reflejar los cambios
 
 # Función para enviar un archivo PDF a la API
 def submit_pdf(file, token: str):
@@ -133,6 +141,8 @@ def main():
         st.session_state.username = None
     if "current_chat_id" not in st.session_state:
         st.session_state.current_chat_id = None
+    if "conversation_memory" not in st.session_state:
+        st.session_state.conversation_memory = {}  # Memoria de la conversación
 
     # Página de autenticación
     if st.session_state.token is None:
