@@ -248,7 +248,6 @@ def main():
             logout()
 
     # Mostrar el historial de chat con estilo mejorado
-    st.header("Chat")
     for message in st.session_state.chat_history:
         if message["role"] == "user":
             with st.chat_message("Human", avatar="🧑‍💻"):
