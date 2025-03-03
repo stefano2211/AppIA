@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-# Configuración de la API FastAPI
+# hOLA
 API_URL = "http://127.0.0.1:8000"  # Cambia esto si tu API está en otro lugar
 
 # Función para manejar el login
